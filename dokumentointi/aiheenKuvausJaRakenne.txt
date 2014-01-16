@@ -1,0 +1,3 @@
+Aihe: Telamiinaharava (variaatio miinaharavapelistä)
+
+Pelin idea on askeleen realistisempi versio perinteisestä miinaharavasta. Pelialusta on ruudukko, jonka ruutuihin arvotaan miinoja. Miinoja etsitään ja tuhotaan panoksilla, joita on rajoitettu määrä. Panoksen vaikutuksesta läheiset miinat ja miinan kaltaiset kivet sekä kannot nousevat pintaan. Aikapaineen ja panoksien säästämisen vuoksi mielenkiinnon kohdetta voi myös lyödä lapiolla. Pelin voittaa, kun ruudukko on tyhjennetty miinoista.
