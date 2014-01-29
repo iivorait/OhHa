@@ -49,14 +49,16 @@ public class Ruutu {
     }
     
     public void tulosta() {
-        if(this.tyyppi==Tyyppi.FEIKKI) {
+        if(!this.avattu) {
+            System.out.print(" ");
+        } else if(this.tyyppi==Tyyppi.FEIKKI) {
             System.out.print("F");
         } else if(this.tyyppi==Tyyppi.MIINA) {
             System.out.print("M");
         } else if(this.tyyppi==Tyyppi.RAJAHTANYT) {
             System.out.print("*");
         } else {
-            System.out.print(" ");
+            System.out.print("-");
         }
     }
     

@@ -7,10 +7,6 @@ import java.util.Random;
 public class Kentta {
     private ArrayList<Ruutu> ruudut;
     private Random random;
-
-    public ArrayList<Ruutu> getRuudut() {
-        return ruudut;
-    }
     
     public Kentta(int sivunPituus, Random random) {
         this.ruudut = new ArrayList<>();
@@ -22,7 +18,22 @@ public class Kentta {
             }
         }
     }
+
+    public ArrayList<Ruutu> getRuudut() {
+        return ruudut;
+    }
     
+    public Ruutu getRuutu(int x, int y) {
+        Ruutu loydettyRuutu = null;
+        
+        for (Ruutu ruutu : ruudut) {
+            if(ruutu.getX()==x && ruutu.getY()==y) {
+                loydettyRuutu = ruutu;
+            }
+        }
+        return loydettyRuutu;
+    }
+ 
     public Tyyppi arvoTyyppi() {
         int arpa = this.random.nextInt(100);
         
