@@ -1,6 +1,8 @@
 package fi.helsinki.cs.telamiinaharava;
 
 import java.util.Scanner;
+import javax.swing.SwingUtilities;
+import kayttoliittyma.Gui;
 import sovelluslogiikka.Peli;
 
 /**
@@ -14,6 +16,9 @@ public class App
         Scanner scanner = new Scanner(System.in);
         
         Peli peli = new Peli(8);
+        
+        Gui kayttoliittyma = new Gui(peli);
+        SwingUtilities.invokeLater(kayttoliittyma);
         
         peli.tulosta();
         
@@ -35,6 +40,7 @@ public class App
             }
 
             peli.tulosta();
+            kayttoliittyma.uudelleenpiirra();
         }
         
         System.out.print("\nPeli loppui ");

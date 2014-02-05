@@ -1,6 +1,7 @@
 
 package sovelluslogiikka;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -19,6 +20,10 @@ public class Peli {
 
     public int getPanoksia() {
         return panoksia;
+    }
+    
+    public ArrayList<Ruutu> getRuudut() {
+        return this.kentta.getRuudut();
     }
 
     public boolean isVoitto() {

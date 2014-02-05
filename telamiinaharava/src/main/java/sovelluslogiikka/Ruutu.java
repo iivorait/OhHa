@@ -1,6 +1,9 @@
 
 package sovelluslogiikka;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Ruutu {
     
     private boolean avattu;
@@ -46,6 +49,21 @@ public class Ruutu {
             return true;
         }
         return false;
+    }
+    
+    public void piirra(Graphics graphics, int koko) {
+        if(!this.avattu) {
+            graphics.setColor(Color.CYAN);
+        } else if(this.tyyppi==Tyyppi.FEIKKI) {
+            graphics.setColor(Color.MAGENTA);
+        } else if(this.tyyppi==Tyyppi.MIINA) {
+            graphics.setColor(Color.red);
+        } else if(this.tyyppi==Tyyppi.RAJAHTANYT) {
+            graphics.setColor(Color.yellow);
+        } else {
+            graphics.setColor(Color.white);
+        }
+        graphics.fillRect(x*koko, y*koko, koko, koko);
     }
     
     public void tulosta() {
