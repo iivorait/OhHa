@@ -2,3 +2,4 @@
 22.01.2014, 3 tuntia, piirretty luokkakaavio, tehty ensimmäiset luokat ja testit. Koekäyttöliittymällä miinakentän voi tyhjentää räjäytyksillä
 29.01.2014, 2 tuntia, pelattava versio tekstikäyttöliittymällä
 05.02.2014, 3 tuntia, graafisen käyttöliittymän luonti aloitettu, kuvat ja pelin lopetusmekanismit puuttuvat vielä
+06.02.2014, 2 tuntia, peli-luokan testi, javadoc aloitettu

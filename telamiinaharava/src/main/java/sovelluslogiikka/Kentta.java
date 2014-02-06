@@ -4,6 +4,10 @@ package sovelluslogiikka;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+* Kentta-luokka luo ja sisältää yksittäiset ruudut. 
+*/
+
 public class Kentta {
     private ArrayList<Ruutu> ruudut;
     private Random random;

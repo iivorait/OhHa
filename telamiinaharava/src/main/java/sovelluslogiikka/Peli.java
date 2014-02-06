@@ -4,6 +4,10 @@ package sovelluslogiikka;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+* Peli-luokka koostaa pelin sovelluslogiikan. Peli tietää, paljonko panoksia on 
+* jäljellä ja jatkuuko peli. Peli luo kentän.
+*/
 
 public class Peli {
     
@@ -12,10 +16,24 @@ public class Peli {
     private int panoksia;
     private boolean voitto;
     
-    public Peli (int sivunPituus) {
-        this.random = new Random();
+    public Peli (int sivunPituus, int panoksia) {
+        this(sivunPituus, panoksia, new Random());
+    }
+    
+    /**
+    * Konstruktorille annetaan kentän koko ja panosten määrä, joita muuttamalla
+    * pelin vaikeustasoa voidaan säädellä. Testausta varten voidaan antaa
+    * Random-olio.
+    *
+    * @param    sivunPituus   Pelikentän yhden sivun pituus ruuduissa
+    * @param    panoksia    Panosten lukumäärä
+    * @param    random  Random-olio (valinnainen)
+    */
+    
+    public Peli (int sivunPituus, int panoksia, Random random) {
+        this.random = random;
         this.kentta = new Kentta(sivunPituus,this.random);
-        this.panoksia = 10;
+        this.panoksia = panoksia;
     }
 
     public int getPanoksia() {
@@ -29,6 +47,15 @@ public class Peli {
     public boolean isVoitto() {
         return voitto;
     }
+    
+    /**
+    * Metodi räjäyttää panoksen annetuissa koordinaateissa. Aluksi panoksia
+    * vähennetään. Metodi avaa koordinaattien läheisyydessä olevat ruudut ja
+    * räjäyttää niistä sisimmät. Aina ei räjähdä samaa määrää ruutuja.
+    *
+    * @param    x   Leveyskoordinaatti
+    * @param    y   Korkeuskoordinaatti
+    */
     
     public void rajayta(int x, int y) {
         this.panoksia--;
@@ -47,12 +74,28 @@ public class Peli {
         }
     }
     
+    /**
+    * Metodi laskee luvun itseisarvon. Käytetään löytämään räjähteen
+    * koordinaattien läheiset ruudut positiivisessa ja negatiivisessa suunnassa
+    *
+    * @param    luku    Alkuperäinen luku
+    * 
+    * @return   luku:n itseisarvo
+    */
     public int itseisarvo(int luku) {
         if(luku > 0) {
             return luku;
         }
         return -luku;
     }
+    
+    /**
+    * Metodi avaa ruudun annetuissa koordinaateissa. Jos ruudussa on miina,
+    * peli loppuu häviöön
+    *
+    * @param    x   Leveyskoordinaatti
+    * @param    y   Korkeuskoordinaatti
+    */
     
     public void kokeileLapiolla(int x, int y) {
         if(this.kentta.getRuutu(x, y).kokeileLapiolla()){ //jos lapio osuu miinaan...
@@ -63,6 +106,11 @@ public class Peli {
     public void tulosta() {
         this.kentta.tulosta();
     }
+    
+    /**
+    * Metodi kertoo, onko peli käynnissä (avaamattomia ruutuja, räjähtämättömiä
+    * miinoja tai panoksia jäljellä). Asettaa voitto-muuttujaan tuloksen
+    */
     
     public boolean kaynnissa() {    
         if(this.panoksia==0) { //panokset loppu

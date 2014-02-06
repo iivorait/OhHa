@@ -4,6 +4,11 @@ package sovelluslogiikka;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+* Ruutu-luokka kuvaa yksittäistä kentän ruutua. Ruutu tietää sijaintinsa, 
+* koskemattomuutensa ja tyyppinsä.
+*/
+
 public class Ruutu {
     
     private boolean avattu;
