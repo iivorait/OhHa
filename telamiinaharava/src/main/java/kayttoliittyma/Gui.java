@@ -7,7 +7,6 @@ package kayttoliittyma;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -25,8 +24,6 @@ import sovelluslogiikka.Ruutu;
 public class Gui implements Runnable {
     private JFrame frame;
     private Peli peli;
-    private Piirtoalusta piirtoalusta;
-    private ArrayList<JButton> ruudut;
     private ArrayList<RuutujenKuuntelija> kuuntelijat = new ArrayList<RuutujenKuuntelija>();
     private JLabel panoksia;
 
@@ -48,8 +45,6 @@ public class Gui implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        //this.piirtoalusta = new Piirtoalusta(this.peli);
-        //container.add(this.piirtoalusta);
         
         JPanel ylapaneeli = new JPanel(new GridLayout(1,1));
         this.panoksia = new JLabel("" + this.peli.getPanoksia());
@@ -57,14 +52,12 @@ public class Gui implements Runnable {
         container.add(ylapaneeli,BorderLayout.NORTH);
         
         JPanel ruudukko = new JPanel(new GridLayout(8,8));
-        
-        //GridLayout layout = new GridLayout(8,8);
-        //container.setLayout(layout);
+
         ArrayList<Ruutu> ruutuoliot = this.peli.getRuudut();
         for (Ruutu ruutu : ruutuoliot) {
-            JButton ruutunappi = new JButton("X");
+            JButton ruutunappi = new JButton();
             RuutujenKuuntelija kuuntelija = new RuutujenKuuntelija(ruutu, ruutunappi, this, peli);
-            ruutunappi.addActionListener(kuuntelija);
+            ruutunappi.addMouseListener(kuuntelija);
             ruudukko.add(ruutunappi);
             this.kuuntelijat.add(kuuntelija);
         }
@@ -76,10 +69,19 @@ public class Gui implements Runnable {
     }
     
     public void uudelleenpiirra() {
-        //this.piirtoalusta.repaint();
+        
         for (RuutujenKuuntelija kuuntelija : kuuntelijat) {
             kuuntelija.paivita();
         }
+        
+        if(!this.peli.kaynnissa()) {
+            this.panoksia.setText("loppu");
+            for (RuutujenKuuntelija kuuntelija : kuuntelijat) {
+                kuuntelija.sulje();
+            }
+            return;
+        }
+
         this.panoksia.setText("" + this.peli.getPanoksia());
     }
 }

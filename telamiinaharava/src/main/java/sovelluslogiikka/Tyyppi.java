@@ -1,5 +1,5 @@
 package sovelluslogiikka;
 
 public enum Tyyppi {
-    TYHJA, MIINA, FEIKKI, RAJAHTANYT;
+    TYHJA, MIINA, FEIKKI, RAJAHTANYT, TODETTUFEIKKI;
 }
