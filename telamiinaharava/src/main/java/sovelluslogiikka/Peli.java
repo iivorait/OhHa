@@ -16,9 +16,6 @@ public class Peli {
     private int panoksia;
     private boolean voitto;
     
-    public Peli (int sivunPituus, int panoksia) {
-        this(sivunPituus, panoksia, new Random());
-    }
     
     /**
     * Konstruktorille annetaan kentän koko ja panosten määrä, joita muuttamalla
@@ -34,6 +31,10 @@ public class Peli {
         this.random = random;
         this.kentta = new Kentta(sivunPituus,this.random);
         this.panoksia = panoksia;
+    }
+    
+    public Peli (int sivunPituus, int panoksia) {
+        this(sivunPituus, panoksia, new Random());
     }
 
     public int getPanoksia() {
@@ -103,13 +104,11 @@ public class Peli {
         }
     }
     
-    public void tulosta() {
-        this.kentta.tulosta();
-    }
-    
     /**
     * Metodi kertoo, onko peli käynnissä (avaamattomia ruutuja, räjähtämättömiä
     * miinoja tai panoksia jäljellä). Asettaa voitto-muuttujaan tuloksen
+    * 
+    * @return true jos peli on käynnissä ja false jos ei ole
     */
     
     public boolean kaynnissa() {    

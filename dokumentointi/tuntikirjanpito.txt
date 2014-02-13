@@ -3,3 +3,5 @@
 29.01.2014, 2 tuntia, pelattava versio tekstikäyttöliittymällä
 05.02.2014, 3 tuntia, graafisen käyttöliittymän luonti aloitettu, kuvat ja pelin lopetusmekanismit puuttuvat vielä
 06.02.2014, 2 tuntia, peli-luokan testi, javadoc aloitettu
+12.02.2014, 2 tuntia, gui parannettu pelattavaksi
+13.02.2014, 2 tuntia, dokumentointia

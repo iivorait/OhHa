@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittyma;
 
 import java.awt.event.MouseEvent;
@@ -12,9 +8,11 @@ import sovelluslogiikka.Ruutu;
 import sovelluslogiikka.Tyyppi;
 
 /**
- *
- * @author iivo
- */
+* RuutujenKuuntelija sisältää yksittäisiin graafisen käyttöliittymän ruutuihin
+* kuuluvan toiminnallisuuden. Luokka vaihtaa ruudun kuvaketta ja käsittelee
+* hiirenpainallukset.
+*/
+
 public class RuutujenKuuntelija implements MouseListener {
     
     private Ruutu ruutu;
@@ -22,6 +20,17 @@ public class RuutujenKuuntelija implements MouseListener {
     private Gui gui;
     private Peli peli;
 
+    /**
+    * Konstruktorille annetaan tuttuun tapaan tieto ruudusta ja napista, mutta
+    * myös Gui- ja Peli -oliot, joihin kohdistetaan huomiota ruutuja päivitettäessä
+    * klikkauksen jälkeen sekä kyselyt pelin tilasta
+    *
+    * @param    ruutu   Ruutu-olio, jota nappi vastaa graafisessa käyttöliittymässä
+    * @param    nappi   Nappi, jota tämä RuutujenKuuntelija kuuntelee
+    * @param    gui     käynnissä oleva Gui-olio
+    * @param    peli    käynnissä oleva Peli-olio
+    */
+    
     public RuutujenKuuntelija(Ruutu ruutu, JButton nappi, Gui gui, Peli peli) {
         this.ruutu = ruutu;
         this.nappi = nappi;
@@ -29,10 +38,14 @@ public class RuutujenKuuntelija implements MouseListener {
         this.peli = peli;
     }
     
+    /**
+    * paivita-metodi muuttaa napin kuvaketta vastaamaan nykyistä tilannetta
+    */
+    
     public void paivita() {
         
         if(!ruutu.onkoAvattu()) {
-            
+            //Jos ruutu on avaamaton, ei näytetä kuvaketta
         } else if(this.ruutu.getTyyppi()==Tyyppi.FEIKKI && this.peli.kaynnissa() ||
                 this.ruutu.getTyyppi()==Tyyppi.MIINA && this.peli.kaynnissa()) {
             this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("kumpare.png")));
@@ -48,10 +61,20 @@ public class RuutujenKuuntelija implements MouseListener {
         
     }
     
+    /**
+    * sulje-metodi asettaa napin pois käytöstä pelin päätyttyä
+    */
+    
     public void sulje() {
         nappi.setEnabled(false);
     }        
 
+    
+    /**
+    * mouseClicked -metodi kokeilee ruutua lapiolla (vasen hiirenpainike) tai
+    * räjäyttää ruudun (oikea hiirenpainike). Toiminnon jälkeen Gui päivitetään
+    */
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == 3) { //oikea hiirenpainike

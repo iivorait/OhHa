@@ -13,6 +13,14 @@ public class Ruutu {
     private int x;
     private int y;
 
+    /**
+    * Konstruktorille annetaan ruudun koordinaatit ja tyyppi
+    *
+    * @param    x       ruudun x-koordinaatti
+    * @param    y       ruudun y-koordinaatti
+    * @param    tyyppi  käynnissä oleva Gui-olio
+    */
+    
     public Ruutu(int x, int y, Tyyppi tyyppi) {
         this.avattu = false;
         this.tyyppi = tyyppi;
@@ -36,14 +44,29 @@ public class Ruutu {
         return avattu;
     }
     
+    /**
+    * avaa-metodi asettaa ruudun avatuksi, eli sen sisältö tulee näkyviin
+    */
+    
     public void avaa() {
         this.avattu = true;
     }
+    
+    /**
+    * rajayta-metodi räjäyttää ruudun sisältöön katsomatta
+    */
     
     public void rajayta() {
         this.avaa();
         this.tyyppi = Tyyppi.RAJAHTANYT;
     }
+    
+    /**
+    * kokeileLapiolla -metodi avaa ruudun ja näyttää sen todellisen sisällön.
+    * Jos ruudussa oli miina, peli päättyy
+    * 
+    * @return true jos miina, false jos ei miinaa
+    */
     
     public boolean kokeileLapiolla() {
         this.avaa();
@@ -53,20 +76,6 @@ public class Ruutu {
             this.tyyppi = Tyyppi.TODETTUFEIKKI;
         }
         return false;
-    }
-    
-    public void tulosta() {
-        if(!this.avattu) {
-            System.out.print(" ");
-        } else if(this.tyyppi==Tyyppi.FEIKKI) {
-            System.out.print("F");
-        } else if(this.tyyppi==Tyyppi.MIINA) {
-            System.out.print("M");
-        } else if(this.tyyppi==Tyyppi.RAJAHTANYT) {
-            System.out.print("*");
-        } else {
-            System.out.print("-");
-        }
     }
     
     

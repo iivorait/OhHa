@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kayttoliittyma;
 
 import java.awt.BorderLayout;
@@ -18,15 +15,22 @@ import sovelluslogiikka.Peli;
 import sovelluslogiikka.Ruutu;
 
 /**
- *
- * @author iivo
- */
+* Gui-luokka koostaa graafisen käyttöliittymän. Luokka sisältää toiminnallisuuden
+* graafisen käyttöliittymän käynnistykseen ja päivitykseen
+*/
+
 public class Gui implements Runnable {
     private JFrame frame;
     private Peli peli;
     private ArrayList<RuutujenKuuntelija> kuuntelijat = new ArrayList<RuutujenKuuntelija>();
     private JLabel panoksia;
 
+    /**
+    * Konstruktorille annetaan aikaisemmin luotu Peli-olio
+    *
+    * @param    peli   käytetty Peli-olio
+    */
+    
     public Gui(Peli peli) {
         this.peli = peli;
     }
@@ -44,6 +48,11 @@ public class Gui implements Runnable {
         frame.setVisible(true);
     }
 
+    /**
+    * luoKomponentit-metodi luo graafisen käyttöliittymän layoutin ja 
+    * Peli-olion ruuduille kuuntelijat
+    */
+    
     private void luoKomponentit(Container container) {
         
         JPanel ylapaneeli = new JPanel(new GridLayout(1,1));
@@ -67,6 +76,12 @@ public class Gui implements Runnable {
     public JFrame getFrame() {
         return frame;
     }
+    
+    /**
+    * uudelleenpiirra-metodi päivittää graafisen käyttöliittymän klikkausten
+    * jälkeen. Metodi tarkistaa Peliltä, onko se käynnissä ja tarvittaessa
+    * lopettaa pelin.
+    */
     
     public void uudelleenpiirra() {
         

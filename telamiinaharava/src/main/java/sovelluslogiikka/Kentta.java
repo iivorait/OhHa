@@ -12,6 +12,13 @@ public class Kentta {
     private ArrayList<Ruutu> ruudut;
     private Random random;
     
+    /**
+    * Konstruktorille annetaan kentän sivun pituus ja Random-olio
+    *
+    * @param    sivunPituus   kentän yhden sivun pituus ruutuina
+    * @param    random        Random-olio
+    */
+    
     public Kentta(int sivunPituus, Random random) {
         this.ruudut = new ArrayList<>();
         this.random = random;
@@ -27,6 +34,15 @@ public class Kentta {
         return ruudut;
     }
     
+    /**
+    * getRuutu palauttaa ruudun tietyistä koordinaateista
+    * 
+    * @param    x   x-koordinaatti
+    * @param    y   y-koordinaatti
+    * 
+    * @return ruutu-olio kyseisissä koordinaateissa
+    */
+    
     public Ruutu getRuutu(int x, int y) {
         Ruutu loydettyRuutu = null;
         
@@ -38,6 +54,12 @@ public class Kentta {
         return loydettyRuutu;
     }
  
+    /**
+    * arvoTyyppi arpoo ruudun tyypin, käytetään miinakentän luonnissa
+    * 
+    * @return Tyyppi
+    */
+    
     public Tyyppi arvoTyyppi() {
         int arpa = this.random.nextInt(100);
         
@@ -48,16 +70,5 @@ public class Kentta {
         }
         
         return Tyyppi.TYHJA;
-    }
-    
-    public void tulosta() {
-        int y = 0;
-        for (Ruutu ruutu : ruudut) {
-            if(y != ruutu.getY()) {
-                System.out.println("");
-                y = ruutu.getY();
-            }
-            ruutu.tulosta();
-        }
     }
 }
