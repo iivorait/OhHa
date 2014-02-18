@@ -128,4 +128,9 @@ public class Peli {
         this.voitto = true;
         return false;
     }
+    
+    public void nollaaPeli () {
+        this.kentta = new Kentta(8,this.random);
+        this.panoksia = 10;
+    }
 }

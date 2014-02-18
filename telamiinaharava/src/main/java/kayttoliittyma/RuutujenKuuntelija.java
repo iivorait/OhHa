@@ -2,6 +2,7 @@ package kayttoliittyma;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import sovelluslogiikka.Peli;
 import sovelluslogiikka.Ruutu;
@@ -46,17 +47,20 @@ public class RuutujenKuuntelija implements MouseListener {
         
         if(!ruutu.onkoAvattu()) {
             //Jos ruutu on avaamaton, ei näytetä kuvaketta
-        } else if(this.ruutu.getTyyppi()==Tyyppi.FEIKKI && this.peli.kaynnissa() ||
+            return;
+        }
+
+        if(this.ruutu.getTyyppi()==Tyyppi.FEIKKI && this.peli.kaynnissa() ||
                 this.ruutu.getTyyppi()==Tyyppi.MIINA && this.peli.kaynnissa()) {
-            this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("kumpare.png")));
-        } else if(this.ruutu.getTyyppi()==Tyyppi.MIINA) { //peli päättynyt          
-            this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("miina.png")));
-        } else if(this.ruutu.getTyyppi()==Tyyppi.TODETTUFEIKKI || this.ruutu.getTyyppi()==Tyyppi.FEIKKI) {          
-            this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("kanto.png")));
+            this.nappi.setIcon(new ImageIcon("src\\resources\\kumpare.png"));
+        } else if(this.ruutu.getTyyppi()==Tyyppi.MIINA) { //peli päättynyt 
+            this.nappi.setIcon(new ImageIcon("src\\resources\\miina.png"));
+        } else if(this.ruutu.getTyyppi()==Tyyppi.TODETTUFEIKKI || this.ruutu.getTyyppi()==Tyyppi.FEIKKI) { 
+            this.nappi.setIcon(new ImageIcon("src\\resources\\kanto.png"));
         } else if(this.ruutu.getTyyppi()==Tyyppi.RAJAHTANYT) {
-            this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("rajahtanyt.png")));
+            this.nappi.setIcon(new ImageIcon("src\\resources\\rajahtanyt.png"));
         } else {
-            this.nappi.setIcon(new javax.swing.ImageIcon(getClass().getResource("tyhja.png")));
+            this.nappi.setIcon(new ImageIcon("src\\resources\\tyhja.png"));
         }
         
     }

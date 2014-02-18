@@ -5,3 +5,4 @@
 06.02.2014, 2 tuntia, peli-luokan testi, javadoc aloitettu
 12.02.2014, 2 tuntia, gui parannettu pelattavaksi
 13.02.2014, 2 tuntia, dokumentointia
+17.02.2014, 1 tunti,  muutettu kuvakkeiden lukukoodia
