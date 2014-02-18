@@ -51,7 +51,7 @@ public class KenttaTest {
     
     @Test
     public void ruutujaOikeaMaara() {
-        Kentta kentta = new Kentta(8, new Random());
+        Kentta kentta = new Kentta(8, new Random(), 10);
         ArrayList ruudut = kentta.getRuudut();
         assertTrue(ruudut.size()==(8*8));
     }
@@ -63,7 +63,7 @@ public class KenttaTest {
         esinkerrat.put(Tyyppi.MIINA, 0);
         esinkerrat.put(Tyyppi.TYHJA, 0);
         
-        Kentta kentta = new Kentta(8, new Random(1234567));
+        Kentta kentta = new Kentta(8, new Random(1234567), 10);
         ArrayList<Ruutu> ruudut = kentta.getRuudut();
         for (Ruutu ruutu : ruudut) {
             esinkerrat.put(ruutu.getTyyppi(), esinkerrat.get(ruutu.getTyyppi()) + 1);
@@ -75,7 +75,7 @@ public class KenttaTest {
     
     @Test
     public void getRuutuToimii() {
-        Kentta kentta = new Kentta(8, new Random(1234567));
+        Kentta kentta = new Kentta(8, new Random(1234567), 10);
         Ruutu ruutu = kentta.getRuutu(0, 1);
         assertTrue(ruutu.getTyyppi()==Tyyppi.MIINA);
         ruutu = kentta.getRuutu(7, 0);
