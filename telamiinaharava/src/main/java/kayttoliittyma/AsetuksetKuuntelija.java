@@ -6,7 +6,6 @@ package kayttoliittyma;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JMenuItem;
 import javax.swing.SwingUtilities;
 import sovelluslogiikka.Peli;
 
@@ -14,22 +13,19 @@ import sovelluslogiikka.Peli;
  *
  * @author iivo
  */
-public class UusiPeliKuuntelija implements ActionListener {
-
+public class AsetuksetKuuntelija implements ActionListener {
+    
     private Peli peli;
     private Gui gui;
 
-    
-    public UusiPeliKuuntelija (Peli peli, Gui gui) {
+    public AsetuksetKuuntelija(Peli peli, Gui gui) {
         this.peli = peli;
         this.gui = gui;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.peli.nollaaPeli();
-        this.gui.paivitaKentta();
-        this.gui.uudelleenpiirra();
+        Asetusikkuna asetusikkuna = new Asetusikkuna(this.peli, this.gui);
+        SwingUtilities.invokeLater(asetusikkuna);
     }
-    
 }

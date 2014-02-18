@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -29,7 +30,8 @@ public class Gui implements Runnable {
     private JFrame frame;
     private Peli peli;
     private ArrayList<RuutujenKuuntelija> kuuntelijat = new ArrayList<RuutujenKuuntelija>();
-    private JLabel panoksia;
+    private JLabel tilannerivi;
+    private JPanel ruudukko;
 
     /**
     * Konstruktorille annetaan aikaisemmin luotu Peli-olio
@@ -44,7 +46,11 @@ public class Gui implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Telamiinaharava");
-        frame.setPreferredSize(new Dimension(400, 400));
+        
+        int leveys = this.peli.getSivunPituus() * 45;
+        int korkeus = leveys + 20;
+        
+        frame.setPreferredSize(new Dimension(leveys, korkeus));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,40 +75,41 @@ public class Gui implements Runnable {
         //container.add(menuBar);
         
         JPanel ylapaneeli = new JPanel(new GridLayout(2,1));
-        this.panoksia = new JLabel("" + this.peli.getPanoksia());
+        this.tilannerivi = new JLabel("Peli alkaa! Panoksia käytettävissä " + this.peli.getPanoksia() + " kpl");
         ylapaneeli.add(menuBar);
-        ylapaneeli.add(panoksia);
+        ylapaneeli.add(tilannerivi);
         container.add(ylapaneeli,BorderLayout.NORTH);
         
-        JPanel ruudukko = luoKentta(8);
-        
+        JPanel ruudukko = luoKentta(this.peli.getSivunPituus());
+        this.ruudukko = ruudukko;
         container.add(ruudukko);
         
         
                 
         // Define and add two drop down menu to the menubar
-        JMenu fileMenu = new JMenu("Valikko");
-        menuBar.add(fileMenu);
+        JMenu valikko = new JMenu("Valikko");
+        menuBar.add(valikko);
         
         // Create and add simple menu item to one of the drop down menu
-        JMenuItem newAction = new JMenuItem("Uusi peli");
-        JMenuItem openAction = new JMenuItem("Asetukset");
-        JMenuItem exitAction = new JMenuItem("Poistu");
+        JMenuItem uusiNappi = new JMenuItem("Uusi peli");
+        JMenuItem asetuksetNappi = new JMenuItem("Asetukset");
+        JMenuItem poistuNappi = new JMenuItem("Taakse poistu");
         
 
         // Create a ButtonGroup and add both radio Button to it. Only one radio
         // button in a ButtonGroup can be selected at a time.
         ButtonGroup bg = new ButtonGroup();
  
-        fileMenu.add(newAction);
-        fileMenu.add(openAction);
+        valikko.add(uusiNappi);
+        valikko.add(asetuksetNappi);
 
-        fileMenu.add(exitAction);
+        valikko.add(poistuNappi);
 
         // Add a listener to the New menu item. actionPerformed() method will
         // invoked, if user triggred this menu item
-        newAction.addActionListener(new UusiPeliKuuntelija(peli, this));
-        exitAction.addActionListener(new PoistuKuuntelija());
+        uusiNappi.addActionListener(new UusiPeliKuuntelija(peli, this));
+        asetuksetNappi.addActionListener(new AsetuksetKuuntelija(this.peli, this));
+        poistuNappi.addActionListener(new PoistuKuuntelija());
 
         
         
@@ -123,14 +130,16 @@ public class Gui implements Runnable {
         return ruudukko;
     }
     
-    public void paivitaKentta() { //EI TOIMI
-        //frame.getContentPane().add(luoKentta(8));
-        //frame.setContentPane(null);
-        frame.removeAll();
-      frame.revalidate(); // try adding this
-      //frame.repaint();
-      luoKomponentit(frame.getContentPane());
-      frame.pack();
+    public void paivitaKentta() {
+        
+        ArrayList<Ruutu> ruudut = peli.getRuudut();
+        
+        Iterator<Ruutu> iteraattori = ruudut.iterator();
+        
+        for (RuutujenKuuntelija kuuntelija : kuuntelijat) {
+            kuuntelija.muutaRuutua(iteraattori.next());
+        }
+        
     }
 
     public JFrame getFrame() {
@@ -144,19 +153,24 @@ public class Gui implements Runnable {
     */
     
     public void uudelleenpiirra() {
-        
+            
         for (RuutujenKuuntelija kuuntelija : kuuntelijat) {
             kuuntelija.paivita();
         }
         
         if(!this.peli.kaynnissa()) {
-            this.panoksia.setText("loppu");
+            if(this.peli.isVoitto()) {
+                this.tilannerivi.setText("Voitit!");
+            } else {
+                this.tilannerivi.setText("Hävisit!");
+            }
+            
             for (RuutujenKuuntelija kuuntelija : kuuntelijat) {
                 kuuntelija.sulje();
             }
             return;
         }
 
-        this.panoksia.setText("" + this.peli.getPanoksia());
+        this.tilannerivi.setText("Panoksia jäljellä " + this.peli.getPanoksia() + " kpl");
     }
 }

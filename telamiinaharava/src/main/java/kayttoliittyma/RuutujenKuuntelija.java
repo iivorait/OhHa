@@ -1,5 +1,6 @@
 package kayttoliittyma;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
@@ -39,17 +40,24 @@ public class RuutujenKuuntelija implements MouseListener {
         this.peli = peli;
     }
     
+    public void muutaRuutua(Ruutu ruutu) {
+        this.ruutu = ruutu;
+        this.nappi.setEnabled(true);
+        this.nappi.setIcon(null);
+        this.nappi.setBackground(null);
+    }
+    
     /**
     * paivita-metodi muuttaa napin kuvaketta vastaamaan nykyistä tilannetta
     */
     
     public void paivita() {
         
-        if(!ruutu.onkoAvattu()) {
-            //Jos ruutu on avaamaton, ei näytetä kuvaketta
+        if(!ruutu.onkoAvattu() || !nappi.isEnabled()) {
+            //Jos ruutu on avaamaton tai pois käytöstä, ei näytetä kuvaketta
             return;
         }
-
+        
         if(this.ruutu.getTyyppi()==Tyyppi.FEIKKI && this.peli.kaynnissa() ||
                 this.ruutu.getTyyppi()==Tyyppi.MIINA && this.peli.kaynnissa()) {
             this.nappi.setIcon(new ImageIcon("src\\resources\\kumpare.png"));
@@ -63,6 +71,9 @@ public class RuutujenKuuntelija implements MouseListener {
             this.nappi.setIcon(new ImageIcon("src\\resources\\tyhja.png"));
         }
         
+        int vaaratilanne = peli.vaaratilanne(this.ruutu.getX(), this.ruutu.getY());
+        
+        this.nappi.setBackground(new Color(255, vaaratilanne, vaaratilanne));
     }
     
     /**

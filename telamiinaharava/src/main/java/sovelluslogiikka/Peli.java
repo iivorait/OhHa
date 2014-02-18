@@ -14,7 +14,11 @@ public class Peli {
     private Kentta kentta;
     private Random random;
     private int panoksia;
+    private int panoksiaAlussa;
     private boolean voitto;
+    private int sivunPituus;
+    private int rajahdysainetta;
+    private int miinoja;
     
     
     /**
@@ -29,8 +33,13 @@ public class Peli {
     
     public Peli (int sivunPituus, int panoksia, Random random) {
         this.random = random;
-        this.kentta = new Kentta(sivunPituus,this.random);
+        this.sivunPituus = sivunPituus;
+        this.miinoja = 10;
+        this.kentta = new Kentta(sivunPituus,this.random, this.miinoja);
         this.panoksia = panoksia;
+        this.panoksiaAlussa = panoksia;
+        this.rajahdysainetta = 100;
+        
     }
     
     public Peli (int sivunPituus, int panoksia) {
@@ -39,6 +48,38 @@ public class Peli {
 
     public int getPanoksia() {
         return panoksia;
+    }
+
+    public void setPanoksiaAlussa(int panoksiaAlussa) {
+        this.panoksiaAlussa = panoksiaAlussa;
+    }
+
+    public int getPanoksiaAlussa() {
+        return panoksiaAlussa;
+    }
+
+    public int getSivunPituus() {
+        return sivunPituus;
+    }
+
+    public void setSivunPituus(int sivunPituus) {
+        this.sivunPituus = sivunPituus;
+    }
+
+    public int getRajahdysainetta() {
+        return rajahdysainetta;
+    }
+
+    public void setRajahdysainetta(int rajahdysainetta) {
+        this.rajahdysainetta = rajahdysainetta;
+    }
+
+    public int getMiinoja() {
+        return miinoja;
+    }
+
+    public void setMiinoja(int miinoja) {
+        this.miinoja = miinoja;
     }
     
     public ArrayList<Ruutu> getRuudut() {
@@ -59,13 +100,20 @@ public class Peli {
     */
     
     public void rajayta(int x, int y) {
-        this.panoksia--;
+        if(this.panoksia > 0) {
+            this.panoksia--;
+        } else {
+            return;
+        }
+        
+        int vaikutusalue = this.rajahdysainetta / 33; 
+        int rajahdysalue = this.rajahdysainetta / 100; 
         
         for (Ruutu ruutu : this.kentta.getRuudut()) {
-            if(itseisarvo(ruutu.getX()-x) <= 3 && itseisarvo(ruutu.getY()-y) <= 3) {
+            if(itseisarvo(ruutu.getX()-x) <= vaikutusalue && itseisarvo(ruutu.getY()-y) <= vaikutusalue) {
                 ruutu.avaa();
             }
-            if(itseisarvo(ruutu.getX()-x) <= 1 && itseisarvo(ruutu.getY()-y) <= 1) {
+            if(itseisarvo(ruutu.getX()-x) <= rajahdysalue && itseisarvo(ruutu.getY()-y) <= rajahdysalue) {
                 ruutu.rajayta();
             } else if(itseisarvo(ruutu.getX()-x) <= 2 && itseisarvo(ruutu.getY()-y) <= 2) {
                 if(this.random.nextInt(100)<25) { //25% mahdollisuus läheisen ruudun räjähtämiseen
@@ -100,7 +148,7 @@ public class Peli {
     
     public void kokeileLapiolla(int x, int y) {
         if(this.kentta.getRuutu(x, y).kokeileLapiolla()){ //jos lapio osuu miinaan...
-            this.panoksia = 0; //... panokset (ja pelaaja) räjähtää miinan mukana
+            this.panoksia = -1; //... panokset (ja pelaaja) räjähtää miinan mukana
         }
     }
     
@@ -112,7 +160,7 @@ public class Peli {
     */
     
     public boolean kaynnissa() {    
-        if(this.panoksia==0) { //panokset loppu
+        if(this.panoksia==-1) { //panokset loppu
             this.voitto = false;
             return false;
         }
@@ -129,8 +177,27 @@ public class Peli {
         return false;
     }
     
+    public int vaaratilanne(int x, int y) {
+        
+        int vaaratilanne = 255; //255 = valkoinen, ei vaaraa
+        
+        for (Ruutu ruutu : this.kentta.getRuudut()) {
+            if(itseisarvo(ruutu.getX()-x) <= 3 && itseisarvo(ruutu.getY()-y) <= 3) {
+                if(ruutu.getTyyppi()==Tyyppi.MIINA || ruutu.getTyyppi()==Tyyppi.FEIKKI) {
+                    vaaratilanne -= 10;
+                }
+            }
+        }
+        
+        if(vaaratilanne<0) {
+            return 0;
+        }
+        
+        return vaaratilanne;
+    }
+    
     public void nollaaPeli () {
-        this.kentta = new Kentta(8,this.random);
-        this.panoksia = 10;
+        this.kentta = new Kentta(this.sivunPituus,this.random, this.miinoja);
+        this.panoksia = this.panoksiaAlussa;
     }
 }

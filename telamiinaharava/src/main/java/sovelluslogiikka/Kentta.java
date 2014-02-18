@@ -19,13 +19,13 @@ public class Kentta {
     * @param    random        Random-olio
     */
     
-    public Kentta(int sivunPituus, Random random) {
+    public Kentta(int sivunPituus, Random random, int suhde) {
         this.ruudut = new ArrayList<>();
         this.random = random;
         
         for (int i = 0; i < sivunPituus; i++) { //rivit
             for (int j = 0; j < sivunPituus; j++) { //sarakkeet
-                ruudut.add(new Ruutu(j,i,this.arvoTyyppi()));
+                ruudut.add(new Ruutu(j,i,this.arvoTyyppi(suhde)));
             }
         }
     }
@@ -60,15 +60,17 @@ public class Kentta {
     * @return Tyyppi
     */
     
-    public Tyyppi arvoTyyppi() {
+    public Tyyppi arvoTyyppi(int suhde) {
         int arpa = this.random.nextInt(100);
         
-        if(arpa<10) { //0-9 = 10% mahdollisuus
+        if(arpa < suhde) { //0-9 = 10% mahdollisuus
             return Tyyppi.MIINA;
-        } else if(arpa<20) { //10-19 = 10% mahdollisuus
+        } else if(arpa < (suhde * 2)) { //10-19 = 10% mahdollisuus
             return Tyyppi.FEIKKI;
         }
         
         return Tyyppi.TYHJA;
     }
+    
+    
 }
