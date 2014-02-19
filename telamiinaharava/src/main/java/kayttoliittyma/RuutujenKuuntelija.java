@@ -40,6 +40,11 @@ public class RuutujenKuuntelija implements MouseListener {
         this.peli = peli;
     }
     
+    /**
+    * muutaRuutua -metodi asettaa kuuntelijalle uuden ruudun ja asettaa
+    * kuuntelijaan liitetyn painikkeen peruslukemille
+    */
+    
     public void muutaRuutua(Ruutu ruutu) {
         this.ruutu = ruutu;
         this.nappi.setEnabled(true);

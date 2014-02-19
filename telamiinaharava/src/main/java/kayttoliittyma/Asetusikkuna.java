@@ -1,46 +1,32 @@
 
 package kayttoliittyma;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.Iterator;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextField;
-import javax.swing.WindowConstants;
 import sovelluslogiikka.Peli;
-import sovelluslogiikka.Ruutu;
 
 /**
-* Gui-luokka koostaa graafisen käyttöliittymän. Luokka sisältää toiminnallisuuden
-* graafisen käyttöliittymän käynnistykseen ja päivitykseen
+* Asetusikkuna-luokka sisältää toiminnallisuuden asetukset-ikkunan luontiin
 */
 
 public class Asetusikkuna implements Runnable {
     private JFrame frame;
     private Peli peli;
-    private Gui gui;
 
     /**
-    * Konstruktorille annetaan aikaisemmin luotu Peli-olio
+    * Konstruktorille annetaan aikaisemmin luotu Peli-olio asetusten lukua
+    * ja kirjoitusta varten
     *
     * @param    peli   käytetty Peli-olio
     */
     
-    public Asetusikkuna(Peli peli, Gui gui) {
+    public Asetusikkuna(Peli peli) {
         this.peli = peli;
-        this.gui = gui;
     }
 
     @Override
@@ -56,8 +42,7 @@ public class Asetusikkuna implements Runnable {
     }
 
     /**
-    * luoKomponentit-metodi luo graafisen käyttöliittymän layoutin ja 
-    * Peli-olion ruuduille kuuntelijat
+    * luoKomponentit-metodi luo ikkunan graafisen ulkoasun
     */
     
     private void luoKomponentit(Container container) {
@@ -74,7 +59,7 @@ public class Asetusikkuna implements Runnable {
         JLabel miinaTeksti = new JLabel("<html>Miinoja: <br>(oletus 10%)</html>");
         JTextField miinaKentta = new JTextField("" + this.peli.getMiinoja());
         JButton tallennaNappi = new JButton("Tallenna");
-        tallennaNappi.addActionListener(new AsetusTallennusKuuntelija(this.peli, this.gui, this.frame,
+        tallennaNappi.addActionListener(new AsetusTallennusKuuntelija(this.peli, this.frame,
                 sivunPituusKentta, panosKentta, rajahdysaineKentta, miinaKentta));
         
         container.add(sivunPituusTeksti);

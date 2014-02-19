@@ -57,6 +57,8 @@ public class Kentta {
     /**
     * arvoTyyppi arpoo ruudun tyypin, käytetään miinakentän luonnissa
     * 
+    * @param    suhde   miinojen ja feikkien suhde tyhjiin. Suhteella 50 puolet ruuduista on miinoja ja puolet feikkejä
+    * 
     * @return Tyyppi
     */
     

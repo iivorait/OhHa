@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package kayttoliittyma;
 
 import java.awt.event.ActionEvent;
@@ -12,23 +8,21 @@ import javax.swing.JTextField;
 import sovelluslogiikka.Peli;
 
 /**
- *
- * @author iivo
+ * AsetusTallennusKuuntelija -luokka lähettää asetukset Peli-oliolle
+ * 
  */
 public class AsetusTallennusKuuntelija implements ActionListener {
 
     private Peli peli;
-    private Gui gui;
     private JFrame frame;
     private JTextField sivunPituusKentta;
     private JTextField panosKentta;
     private JTextField rajahdysaineKentta;
     private JTextField miinaKentta;
     
-    AsetusTallennusKuuntelija(Peli peli, Gui gui, JFrame frame,
+    AsetusTallennusKuuntelija(Peli peli, JFrame frame,
             JTextField sivunPituusKentta, JTextField panosKentta, JTextField rajahdysaineKentta, JTextField miinaKentta) {
         this.peli = peli;
-        this.gui = gui;
         this.frame = frame;
         this.sivunPituusKentta = sivunPituusKentta;
         this.panosKentta = panosKentta;

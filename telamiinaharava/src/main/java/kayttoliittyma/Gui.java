@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 import sovelluslogiikka.Peli;
 import sovelluslogiikka.Ruutu;
@@ -67,56 +65,44 @@ public class Gui implements Runnable {
     
     private void luoKomponentit(Container container) {
         
-        // Creates a menubar for a JFrame
-        JMenuBar menuBar = new JMenuBar();
-        
-        // Add the menubar to the frame
-        //setJMenuBar(menuBar);
-        //container.add(menuBar);
-        
+        JMenuBar valikkoBar = new JMenuBar();
+   
         JPanel ylapaneeli = new JPanel(new GridLayout(2,1));
         this.tilannerivi = new JLabel("Peli alkaa! Panoksia käytettävissä " + this.peli.getPanoksia() + " kpl");
-        ylapaneeli.add(menuBar);
+        ylapaneeli.add(valikkoBar);
         ylapaneeli.add(tilannerivi);
         container.add(ylapaneeli,BorderLayout.NORTH);
         
-        JPanel ruudukko = luoKentta(this.peli.getSivunPituus());
+        JPanel ruudukko = luoKentta();
         this.ruudukko = ruudukko;
         container.add(ruudukko);
         
+        JMenu valikkoSisalto = new JMenu("Valikko");
+        valikkoBar.add(valikkoSisalto);
         
-                
-        // Define and add two drop down menu to the menubar
-        JMenu valikko = new JMenu("Valikko");
-        menuBar.add(valikko);
-        
-        // Create and add simple menu item to one of the drop down menu
         JMenuItem uusiNappi = new JMenuItem("Uusi peli");
         JMenuItem asetuksetNappi = new JMenuItem("Asetukset");
         JMenuItem poistuNappi = new JMenuItem("Taakse poistu");
-        
 
-        // Create a ButtonGroup and add both radio Button to it. Only one radio
-        // button in a ButtonGroup can be selected at a time.
-        ButtonGroup bg = new ButtonGroup();
  
-        valikko.add(uusiNappi);
-        valikko.add(asetuksetNappi);
+        valikkoSisalto.add(uusiNappi);
+        valikkoSisalto.add(asetuksetNappi);
+        valikkoSisalto.add(poistuNappi);
 
-        valikko.add(poistuNappi);
-
-        // Add a listener to the New menu item. actionPerformed() method will
-        // invoked, if user triggred this menu item
         uusiNappi.addActionListener(new UusiPeliKuuntelija(peli, this));
-        asetuksetNappi.addActionListener(new AsetuksetKuuntelija(this.peli, this));
+        asetuksetNappi.addActionListener(new AsetuksetKuuntelija(this.peli));
         poistuNappi.addActionListener(new PoistuKuuntelija());
 
-        
-        
     }
     
-    private JPanel luoKentta(int sivunPituus) {
-        JPanel ruudukko = new JPanel(new GridLayout(sivunPituus, sivunPituus));
+    /**
+    * luoKentta -metodi luo kentän graafisen ilmentymän
+    * 
+    * @return JPanel sisältäen GridLayoutin ruutuineen ja kuuntelijoineen
+    */
+    
+    private JPanel luoKentta() {
+        JPanel ruudukko = new JPanel(new GridLayout(this.peli.getSivunPituus(), this.peli.getSivunPituus()));
 
         ArrayList<Ruutu> ruutuoliot = this.peli.getRuudut();
         for (Ruutu ruutu : ruutuoliot) {
@@ -129,6 +115,11 @@ public class Gui implements Runnable {
         
         return ruudukko;
     }
+    
+    /**
+    * paivitaKentta -metodi muuttaa ruutujen kuuntelijoille uudet ruutu-oliot,
+    * kun kenttä on muuttunut uuden pelin aloituksen yhteydessä
+    */
     
     public void paivitaKentta() {
         

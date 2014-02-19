@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
 * Peli-luokka koostaa pelin sovelluslogiikan. Peli tietää, paljonko panoksia on 
-* jäljellä ja jatkuuko peli. Peli luo kentän.
+* jäljellä ja jatkuuko peli. Peli tietää myös asetukset. Peli luo kentän.
 */
 
 public class Peli {
@@ -183,10 +183,11 @@ public class Peli {
             return false;
         }
         
+        if(!kaikkiRuudutAvattu) { //avaamattomia ruutuja löytyy vielä
+            return true;
+        }
+        
         for (Ruutu ruutu : this.kentta.getRuudut()) { 
-            if(!ruutu.onkoAvattu()) { //avaamattomia ruutuja löytyy vielä
-                return true;
-            }
             if(ruutu.getTyyppi()==Tyyppi.MIINA || ruutu.getTyyppi()==Tyyppi.FEIKKI) { //miinoja löytyy vielä
                 return true;
             }
@@ -195,6 +196,16 @@ public class Peli {
         this.voitto = true;
         return false;
     }
+    
+    /**
+    * Metodi kertoo läheisistä miinoista asteikolla 0-255. Arvoa käytetään
+    * RGB-värin esittämiseen, missä G ja B ovat 255 ja R metodin paluuarvo
+    * 
+    * @param    x   x-koordinaatti
+    * @param    y   y-koordinaatti
+    * 
+    * @return int vaaratilanne asteikolla 0-255
+    */
     
     public int vaaratilanne(int x, int y) {
         
@@ -214,6 +225,10 @@ public class Peli {
         
         return vaaratilanne;
     }
+    
+    /**
+    * Metodi luo uuden kentän ja nollaa panosten määrän, eli aloittaa pelin alusta
+    */
     
     public void nollaaPeli () {
         this.kentta = new Kentta(this.sivunPituus,this.random, this.miinoja);
