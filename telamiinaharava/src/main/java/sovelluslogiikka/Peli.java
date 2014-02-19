@@ -160,6 +160,24 @@ public class Peli {
     */
     
     public boolean kaynnissa() {    
+        
+        boolean kaikkiRuudutAvattu = true;
+        int miinojenLukumaara = 0;
+        
+        for (Ruutu ruutu : this.kentta.getRuudut()) { 
+            if(!ruutu.onkoAvattu()) {
+                kaikkiRuudutAvattu = false;
+            }
+            if(ruutu.getTyyppi()==Tyyppi.MIINA) {
+                miinojenLukumaara++;
+            }
+        }
+        
+        if(kaikkiRuudutAvattu && miinojenLukumaara == 1 && this.panoksia == -1) { //viimeinen ruutu oli miina
+            this.voitto = true;
+            return false;
+        }
+        
         if(this.panoksia==-1) { //panokset loppu
             this.voitto = false;
             return false;
@@ -169,10 +187,11 @@ public class Peli {
             if(!ruutu.onkoAvattu()) { //avaamattomia ruutuja löytyy vielä
                 return true;
             }
-            if(ruutu.getTyyppi()==Tyyppi.MIINA) { //miinoja löytyy vielä
+            if(ruutu.getTyyppi()==Tyyppi.MIINA || ruutu.getTyyppi()==Tyyppi.FEIKKI) { //miinoja löytyy vielä
                 return true;
             }
         }
+        
         this.voitto = true;
         return false;
     }
