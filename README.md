@@ -1,4 +1,3 @@
-OhHa
+Telamiinaharava
 ====
-Koekirjoitus
-Toinen koekirjoitus
+Hieman realistisempi variaatio miinaharavasta
