@@ -1,0 +1,20 @@
+Tavoite: tyhjenn‰ kentt‰ telamiinoista
+V‰lineet: r‰j‰hteit‰ ja kentt‰lapio
+Vaatimukset: moukan tuuria tai helpot asetukset
+Painikkeet:
+	Vasen hiirenpainike: lyˆ kohtaa lapiolla
+	Oikea hiirenpainike: aseta kohtaan r‰j‰hde
+
+Peli alkaa tyhj‰ll‰ 13x13 ruudun kent‰ll‰. Aloita asettamalla r‰j‰hde kent‰n keskelle.
+R‰j‰hteen l‰heisyyteen ilmestyy savuavia kuoppia ja nelilehtisi‰ apiloita. N‰m‰ ruudut
+ovat harmittomia, mutta mit‰ kummaa ovat nuo ruskeat kumpareet? R‰j‰hde on kallistanut
+pinnassa lymyilev‰‰ esinett‰ - siell‰ on joko kanto tai pahamaineinen telamiina. Voit
+pelata varman p‰‰lle ja tuhota ep‰ilytt‰v‰n kumpareen r‰j‰hteell‰, tai s‰‰st‰‰
+r‰j‰hteit‰ ja koittaa kumparetta lapiolla. Jos l‰hdet s‰‰stˆkuurille ja alat huitoa
+lapiolla ymp‰ri kentt‰‰, mututuntumasi varoittaa l‰hell‰ olevista ep‰ilytt‰vist‰
+esineist‰: mit‰ tummemman punainen ruudun tausta on, sit‰ enemm‰n sen l‰hettyvill‰ on
+esineit‰. Voitat, kun kaikki miinat on r‰j‰ytetty ja kannot on k‰‰nnetty. H‰vi‰t, jos
+osut lapiolla miinaan.
+
+Pelin vaikeustasoa voi s‰‰t‰‰ asetuksista, josta voi muuttaa kent‰n kokoa, miinojen ja
+tyhjien kohtien suhdetta sek‰ r‰j‰hteiden m‰‰r‰‰ ja niiden tehokkuutta.

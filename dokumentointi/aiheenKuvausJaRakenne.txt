@@ -6,3 +6,15 @@ ja tuhotaan panoksilla, joita on rajoitettu määrä. Panoksen vaikutuksesta
 läheiset miinat ja miinan kaltaiset kivet sekä kannot nousevat pintaan.
 Aikapaineen ja panoksien säästämisen vuoksi mielenkiinnon kohdetta voi 
 myös lyödä lapiolla. Pelin voittaa, kun ruudukko on tyhjennetty miinoista.
+
+Rakennekuvaus:
+
+Peli-luokka kokoaa pelin logiikan. Peli luo Kenttä-olion, joka luo
+yksittäiset ruudut, eli Ruutu-oliot. 
+
+Gui-luokka kokoaa pelin graafisen ulkoasun. Gui:lle annetaan Peli-olio,
+jonka jokaiseen ruutuun kiinnitetään RuutujenKuuntelija. Gui:hin liittyy
+myös useita pieniä kuuntelijoita valikkopainikkeiden vuoksi.
+
+Gui:n ruutujenkuuntelijat lähettävät pelaajan liikkeet Gui:lle annetulle
+Peli-oliolle ja RuutujenKuuntelijat toimivat Ruutu-olioiden mukaisesti.

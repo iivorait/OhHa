@@ -8,3 +8,5 @@
 17.02.2014, 1 tunti,  muutettu kuvakkeiden lukukoodia
 18.02.2014, 3 tuntia, lisätty läheisistä miinoista varoittava väriskaala, valikko ja asetukset
 19.02.2014, 1 tunti,  koodia siistitty
+25.02.2014, 3 tuntia, jar-tiedoston vaatimat muokkaukset (pom.xml, resources-kansion siirto, kuvien luku), kentän koon muuttaminen asetuksista, testien kirjotusta
+28.02.2014, 3 tuntia, dokumentointi ja viimeistelyt

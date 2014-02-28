@@ -77,6 +77,14 @@ public class RuutuTest {
     }
     
     @Test
+    public void lapiollaKokeileminenToimiiFeikilla() {
+        Ruutu ruutu = new Ruutu(0,0,Tyyppi.FEIKKI);
+        assertFalse(ruutu.kokeileLapiolla());
+        assertTrue(ruutu.onkoAvattu());
+        assertEquals(Tyyppi.TODETTUFEIKKI, ruutu.getTyyppi());
+    }
+    
+    @Test
     public void rajayttaminenToimii() {
         Ruutu ruutu = new Ruutu(0,0,Tyyppi.MIINA);
         ruutu.rajayta();

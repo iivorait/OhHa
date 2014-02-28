@@ -56,6 +56,24 @@
             <artifactId>maven-javadoc-plugin</artifactId>
             <version>2.9.1</version>
         </plugin>
+        
+        <plugin>
+        <!-- Tällä saadaan .jar-tiedosto tehtyä -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <configuration>
+            <archive>
+                <manifest>
+                    <addClasspath>true</addClasspath>
+                    <classpathPrefix>lib/</classpathPrefix>
+                    <mainClass>fi.helsinki.cs.telamiinaharava.App</mainClass>
+                </manifest>
+            </archive>
+         </configuration>
+        </plugin>
+
+        
     </plugins>
 </build>
 

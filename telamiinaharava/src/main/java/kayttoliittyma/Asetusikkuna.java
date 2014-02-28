@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import kuuntelijat.AsetusTallennusKuuntelija;
 import sovelluslogiikka.Peli;
 
 /**
@@ -17,6 +18,7 @@ import sovelluslogiikka.Peli;
 public class Asetusikkuna implements Runnable {
     private JFrame frame;
     private Peli peli;
+    private Gui gui;
 
     /**
     * Konstruktorille annetaan aikaisemmin luotu Peli-olio asetusten lukua
@@ -25,15 +27,16 @@ public class Asetusikkuna implements Runnable {
     * @param    peli   käytetty Peli-olio
     */
     
-    public Asetusikkuna(Peli peli) {
+    public Asetusikkuna(Peli peli, Gui gui) {
         this.peli = peli;
+        this.gui = gui;
     }
 
     @Override
     public void run() {
         frame = new JFrame("Asetukset");
         
-        frame.setPreferredSize(new Dimension(300, 200));
+        frame.setPreferredSize(new Dimension(450, 250));
 
         luoKomponentit(frame.getContentPane());
 
@@ -50,7 +53,7 @@ public class Asetusikkuna implements Runnable {
         GridLayout layout = new GridLayout(5,2);
         container.setLayout(layout);
         
-        JLabel sivunPituusTeksti = new JLabel("<html>Kentän sivun pituus: <br>(oletus 13)</html>");
+        JLabel sivunPituusTeksti = new JLabel("<html>Kentän sivun pituus: <br>(oletus 13 ruutua)</html>");
         JTextField sivunPituusKentta = new JTextField("" + this.peli.getSivunPituus());
         JLabel panosTeksti = new JLabel("<html>Panosten määrä: <br>(oletus 10 kpl)</html>");
         JTextField panosKentta = new JTextField("" + this.peli.getPanoksiaAlussa());
@@ -58,9 +61,10 @@ public class Asetusikkuna implements Runnable {
         JTextField rajahdysaineKentta = new JTextField("" + this.peli.getRajahdysainetta());
         JLabel miinaTeksti = new JLabel("<html>Miinoja: <br>(oletus 10%)</html>");
         JTextField miinaKentta = new JTextField("" + this.peli.getMiinoja());
-        JButton tallennaNappi = new JButton("Tallenna");
-        tallennaNappi.addActionListener(new AsetusTallennusKuuntelija(this.peli, this.frame,
+        JButton tallennaNappi = new JButton("Tallenna ja aloita uusi peli");
+        tallennaNappi.addActionListener(new AsetusTallennusKuuntelija(this.frame, this.gui,
                 sivunPituusKentta, panosKentta, rajahdysaineKentta, miinaKentta));
+        JLabel ohjeTeksti = new JLabel("Älä kirjoita yksikköä");
         
         container.add(sivunPituusTeksti);
         container.add(sivunPituusKentta);
@@ -71,6 +75,7 @@ public class Asetusikkuna implements Runnable {
         container.add(miinaTeksti);
         container.add(miinaKentta);
         container.add(tallennaNappi);
+        container.add(ohjeTeksti);
     }
 
 

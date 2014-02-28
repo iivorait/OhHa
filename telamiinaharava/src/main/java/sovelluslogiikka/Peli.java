@@ -62,10 +62,6 @@ public class Peli {
         return sivunPituus;
     }
 
-    public void setSivunPituus(int sivunPituus) {
-        this.sivunPituus = sivunPituus;
-    }
-
     public int getRajahdysainetta() {
         return rajahdysainetta;
     }
@@ -84,6 +80,10 @@ public class Peli {
     
     public ArrayList<Ruutu> getRuudut() {
         return this.kentta.getRuudut();
+    }
+    
+    public Kentta getKentta() {
+        return this.kentta;
     }
 
     public boolean isVoitto() {
@@ -115,7 +115,7 @@ public class Peli {
             }
             if(itseisarvo(ruutu.getX()-x) <= rajahdysalue && itseisarvo(ruutu.getY()-y) <= rajahdysalue) {
                 ruutu.rajayta();
-            } else if(itseisarvo(ruutu.getX()-x) <= 2 && itseisarvo(ruutu.getY()-y) <= 2) {
+            } else if(itseisarvo(ruutu.getX()-x) <= vaikutusalue-1 && itseisarvo(ruutu.getY()-y) <= vaikutusalue-1) {
                 if(this.random.nextInt(100)<25) { //25% mahdollisuus läheisen ruudun räjähtämiseen
                     ruutu.rajayta();
                 }
@@ -132,7 +132,7 @@ public class Peli {
     * @return   luku:n itseisarvo
     */
     public int itseisarvo(int luku) {
-        if(luku > 0) {
+        if(luku >= 0) {
             return luku;
         }
         return -luku;
@@ -188,7 +188,7 @@ public class Peli {
         }
         
         for (Ruutu ruutu : this.kentta.getRuudut()) { 
-            if(ruutu.getTyyppi()==Tyyppi.MIINA || ruutu.getTyyppi()==Tyyppi.FEIKKI) { //miinoja löytyy vielä
+            if(ruutu.getTyyppi()==Tyyppi.MIINA || ruutu.getTyyppi()==Tyyppi.FEIKKI) { //miinoja tai feikkejä löytyy vielä
                 return true;
             }
         }
@@ -219,7 +219,7 @@ public class Peli {
             }
         }
         
-        if(vaaratilanne<0) {
+        if(vaaratilanne<=0) {
             return 0;
         }
         

@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +15,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+import kuuntelijat.AsetuksetKuuntelija;
+import kuuntelijat.PoistuKuuntelija;
+import kuuntelijat.RuutujenKuuntelija;
+import kuuntelijat.UusiPeliKuuntelija;
 import sovelluslogiikka.Peli;
 import sovelluslogiikka.Ruutu;
 
@@ -90,7 +93,7 @@ public class Gui implements Runnable {
         valikkoSisalto.add(poistuNappi);
 
         uusiNappi.addActionListener(new UusiPeliKuuntelija(peli, this));
-        asetuksetNappi.addActionListener(new AsetuksetKuuntelija(this.peli));
+        asetuksetNappi.addActionListener(new AsetuksetKuuntelija(this.peli, this));
         poistuNappi.addActionListener(new PoistuKuuntelija());
 
     }
